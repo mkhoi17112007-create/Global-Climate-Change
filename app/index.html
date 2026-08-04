@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Climate Data - Weather Forecast</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <i class="fa-solid fa-earth-americas"></i> <span>ClimateVision</span>
+        </div>
+        <nav class="sidebar-nav">
+            <ul>
+                <li><a href="#" id="side-home" class="active"><i class="fa-solid fa-house"></i> <span>Trang chủ</span></a></li>
+                <li><a href="#" id="side-data"><i class="fa-solid fa-database"></i> <span>Dữ liệu</span></a></li>
+                <li><a href="#" id="side-predict"><i class="fa-solid fa-crystal-ball"></i> <span>Dự báo (AI)</span></a></li>
+                <li><a href="#" id="side-map"><i class="fa-solid fa-map-location-dot"></i> <span>Bản đồ</span></a></li>
+                <li><a href="#" id="side-about"><i class="fa-solid fa-circle-info"></i> <span>Giới thiệu</span></a></li>
+            </ul>
+        </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-layout" id="mainContent">
+        <header class="top-bar">
+            <div class="top-bar-left">
+                <div class="menu-toggle" id="menuToggle">
+                    <i class="fa-solid fa-bars"></i>
+                </div>
+                <div class="current-page-title" id="pageTitle">Trang chủ</div>
+            </div>
+            
+            <div class="nav-search-box">
+                <i class="fa-solid fa-location-dot"></i>
+                <input type="text" id="cityInput" placeholder="Tìm thành phố...">
+                <button id="searchBtn"><i class="fa-solid fa-magnifying-glass"></i></button>
+            </div>
+        </header>
+
+        <div class="container">
+            
+            <!-- 1. VÙNG TRANG CHỦ -->
+            <section id="home-tab" class="tab-content">
+                <div class="welcome-text" style="text-align: center; margin-bottom: 2rem;">
+                    <h1>Chào mừng đến với ClimateVision</h1>
+                    <p>Khám phá dữ liệu khí hậu và dự báo thời tiết thông minh.</p>
+                </div>
+
+                <div class="weather-card" id="weatherCard">
+                    <div class="loader" id="loader"></div>
+                    
+                    <div class="weather-content" id="weatherContent">
+                        <h2 id="cityName">Thành phố</h2>
+                        <div class="temperature">
+                            <h1 id="tempValue">--</h1><span>°C</span>
+                        </div>
+                        <p class="condition" id="weatherCondition">Đang chờ dữ liệu...</p>
+                        
+                        <div class="details">
+                            <div class="detail-item">
+                                <i class="fa-solid fa-droplet"></i>
+                                <div>
+                                    <p>Độ ẩm</p>
+                                    <p class="detail-value" id="humidityValue">--%</p>
+                                </div>
+                            </div>
+                            <div class="detail-item">
+                                <i class="fa-solid fa-wind"></i>
+                                <div>
+                                    <p>Sức gió</p>
+                                    <p class="detail-value" id="windValue">-- km/h</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 2. VÙNG DỮ LIỆU -->
+            <section id="data-tab" class="tab-content hidden">
+                <div class="data-header">
+                    <h2><i class="fa-solid fa-database"></i> Dataset</h2>
+                    <div class="data-controls">
+                        <div class="data-search">
+                            <input type="text" id="dataSearchInput" placeholder="Tìm kiếm trong bảng...">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </div>
+                        <div class="dataset-selector">
+                            <label for="datasetSelect">Chọn bộ dữ liệu:</label>
+                            <select id="datasetSelect">
+                                <option value="state_temp_cleaned.csv">Nhiệt độ theo Bang (Cleaned)</option>
+                                <option value="major_city_temp_cleaned.csv">Nhiệt độ Thành phố lớn</option>
+                                <option value="city_temp_cleaned.csv">Nhiệt độ Thành phố (Full)</option>
+                                <option value="country_temp_cleaned.csv">Nhiệt độ Quốc gia</option>
+                                <option value="global_temp_cleaned.csv">Nhiệt độ Toàn cầu</option>
+                                <option value="city_country_joined.csv">Dữ liệu Kết hợp (City & Country)</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="table-container">
+                    <!-- Bảng dữ liệu của ông Khôi sẽ được JS chèn vào đây -->
+                </div>
+            </section>
+
+            <!-- 3. VÙNG DỰ BÁO (Sắp ra mắt) -->
+            <section id="predict-tab" class="tab-content hidden">
+                <div class="predict-container">
+                    <div class="glass-card">
+                        <h2><i class="fa-solid fa-crystal-ball"></i> Dự báo thời tiết thông minh (AI)</h2>
+                        <p class="subtitle">Chúng tôi đang phát triển mô hình AI để dự báo nhiệt độ toàn cầu trong tương lai.</p>
+                        
+                        <div class="coming-soon">
+                            <div class="pulse-icon"><i class="fa-solid fa-robot"></i></div>
+                            <h3>Sắp Ra Mắt</h3>
+                            <p>Tính năng sử dụng Machine Learning để phân tích xu hướng biến đổi khí hậu.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 4. VÙNG BẢN ĐỒ -->
+            <section id="map-tab" class="tab-content hidden">
+                <h2><i class="fa-solid fa-map-location-dot"></i> Bản đồ Khí hậu Tương tác</h2>
+                <div class="map-container" style="width: 100%; margin-top: 1.5rem;">
+                    <iframe src="https://embed.windy.com/embed2.html?lat=10.776&lon=106.701&detailLat=10.776&detailLon=106.701&width=650&height=450&zoom=5&level=surface&overlay=temp&product=ecmwf&menu=&message=true&marker=&calendar=now&pressure=&type=map&location=coordinates&detail=&metricWind=default&metricTemp=default&radarRange=-1" frameborder="0" style="width:100%; height:500px; border-radius:15px;"></iframe>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <!-- Hộp thoại Giới thiệu thành viên -->
+    <div id="aboutModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <h2><i class="fa-solid fa-users"></i> ĐỘI NGŨ PHÁT TRIỂN</h2>
+            <div class="team-container">
+                <div class="team-member">
+                    <i class="fa-solid fa-user-tie"></i>
+                    <h3>Vũ Quang Khải</h3>
+                    <p>Trưởng Nhóm</p>
+                </div>
+                <div class="team-member">
+                    <i class="fa-solid fa-code"></i>
+                    <h3>Trần Hoàng Nam</h3>
+                    <p>Làm Website</p>
+                </div>
+                <div class="team-member">
+                    <i class="fa-solid fa-database"></i>
+                    <h3>Nguyễn Minh Khôi</h3>
+                    <p>Làm Dataset</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Thư viện đọc CSV và file logic -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
