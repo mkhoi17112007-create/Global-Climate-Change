@@ -3,49 +3,51 @@ from pydantic import BaseModel
 import pandas as pd
 import joblib
 import uvicorn
+import os
 
-# == 1. KHỞI TẠO FASTAPI ===
 app = FastAPI(
-    title="Climate Change Temperature Prediction API",
-    description="API dự đoán nhiệt độ trung bình hàng tháng dựa trên mô hình XGBoost.",
-    version="1.0"
+    title="Climate Change API (5 Cities)",
+    description="API dự báo biến đổi khí hậu cho 5 thành phố lớn bằng Prophet.",
+    version="2.0"
 )
 
-# == 2. LOAD MODEL ===
-# Giả sử bạn đã lưu mô hình tốt nhất từ Notebook 06 vào thư mục models/ (hoặc từ Model.py vào thư mục model/)
-try:
-    # Load file pkl mô hình ở đây
-    model = joblib.load("../model/xgboost_model.pkl") 
-    print("Đã load mô hình XGBoost thành công")
-except Exception as e:
-    print("Cảnh báo load model:", e)
-    model = None
-
-# == 3. MÔ TẢ CẤU TRÚC DỮ LIỆU ===
+# 1. Khai báo cấu trúc dữ liệu nhận từ người dùng (Có thêm 'city')
 class PredictionInput(BaseModel):
+    city: str
     year: int
-    month: int
-    lag_1: float
-    lag_12: float
-    rolling_mean_12: float
 
-# == 4. CÁC ENDPOINT API ===
+# 2. Endpoint xử lý dự báo
 @app.post("/predict")
 def predict_temperature(data: PredictionInput):
-    if model is None:
-        raise HTTPException(status_code=500, detail="Model chưa được nạp. Hãy huấn luyện và lưu file mô hình trước.")
+    # Chuẩn hóa tên thành phố để khớp với tên file đã lưu (vd: 'New York' -> 'new_york')
+    city_formatted = data.city.replace(" ", "_").lower()
+    model_path = f"../model/prophet_{city_formatted}.pkl"
 
-    input_df = pd.DataFrame([data.dict()])
+    # Kiểm tra xem mô hình của thành phố này có tồn tại không
+    if not os.path.exists(model_path):
+        raise HTTPException(status_code=404, detail=f"Không tìm thấy mô hình cho thành phố: {data.city}")
 
     try:
-        pred = model.predict(input_df)[0]
+        # Tải mô hình tương ứng
+        model = joblib.load(model_path)
+
+        # Tạo thời gian dự báo cho 12 tháng của năm được yêu cầu
+        dates = pd.date_range(start=f"{data.year}-01-01", end=f"{data.year}-12-01", freq='MS')
+        input_df = pd.DataFrame({'ds': dates})
+
+        # Thực hiện dự báo
+        pred = model.predict(input_df)
+        avg_temp = pred['yhat'].mean()
+
         return {
             "status": "success",
-            "predicted_temperature": float(pred)
+            "city": data.city,
+            "year": data.year,
+            "predicted_avg_temperature": float(avg_temp),
+            "monthly_predictions": pred['yhat'].tolist()
         }
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
-# == 5. CHẠY APP ===
 if __name__ == "__main__":
     uvicorn.run(app, host="0.0.0.0", port=8000)
