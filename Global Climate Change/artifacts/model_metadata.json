@@ -1,0 +1,153 @@
+{
+  "model_name": "Ridge",
+  "short_term_best_model": "Random Forest",
+  "target": "average_temperature_observed",
+  "features": [
+    "year",
+    "month",
+    "quarter",
+    "time_idx",
+    "month_sin",
+    "month_cos",
+    "temp_lag_1",
+    "temp_lag_3",
+    "temp_lag_6",
+    "temp_lag_12",
+    "temp_lag_24",
+    "temp_roll_mean_3",
+    "temp_roll_mean_6",
+    "temp_roll_mean_12",
+    "temp_roll_std_12",
+    "global_temp_lag_1",
+    "global_temp_lag_12",
+    "global_temp_roll12_lag1",
+    "city_summary_temp_lag_1",
+    "city_summary_temp_lag_12",
+    "city_summary_temp_roll12_lag1",
+    "state_summary_temp_lag_1",
+    "state_summary_temp_lag_12",
+    "state_summary_temp_roll12_lag1",
+    "major_city_temp_lag_1",
+    "major_city_temp_lag_12",
+    "major_city_temp_roll12_lag1",
+    "city_country_gap_lag1",
+    "state_country_gap_lag1",
+    "major_city_country_gap_lag1",
+    "country_global_gap_lag1"
+  ],
+  "base_features": [
+    "year",
+    "month",
+    "quarter",
+    "time_idx",
+    "month_sin",
+    "month_cos"
+  ],
+  "country_trend_features": [
+    "temp_lag_1",
+    "temp_lag_3",
+    "temp_lag_6",
+    "temp_lag_12",
+    "temp_lag_24",
+    "temp_roll_mean_3",
+    "temp_roll_mean_6",
+    "temp_roll_mean_12",
+    "temp_roll_std_12"
+  ],
+  "aux_features": [
+    "global_temp_lag_1",
+    "global_temp_lag_12",
+    "global_temp_roll12_lag1",
+    "city_summary_temp_lag_1",
+    "city_summary_temp_lag_12",
+    "city_summary_temp_roll12_lag1",
+    "state_summary_temp_lag_1",
+    "state_summary_temp_lag_12",
+    "state_summary_temp_roll12_lag1",
+    "major_city_temp_lag_1",
+    "major_city_temp_lag_12",
+    "major_city_temp_roll12_lag1",
+    "city_country_gap_lag1",
+    "state_country_gap_lag1",
+    "major_city_country_gap_lag1",
+    "country_global_gap_lag1"
+  ],
+  "forecast_safe_features": [
+    "year",
+    "month",
+    "quarter",
+    "time_idx",
+    "month_sin",
+    "month_cos",
+    "temp_lag_1",
+    "temp_lag_3",
+    "temp_lag_6",
+    "temp_lag_12",
+    "temp_lag_24",
+    "temp_roll_mean_3",
+    "temp_roll_mean_6",
+    "temp_roll_mean_12",
+    "temp_roll_std_12",
+    "global_temp_lag_1",
+    "global_temp_lag_12",
+    "global_temp_roll12_lag1",
+    "city_summary_temp_lag_1",
+    "city_summary_temp_lag_12",
+    "city_summary_temp_roll12_lag1",
+    "state_summary_temp_lag_1",
+    "state_summary_temp_lag_12",
+    "state_summary_temp_roll12_lag1",
+    "major_city_temp_lag_1",
+    "major_city_temp_lag_12",
+    "major_city_temp_roll12_lag1",
+    "city_country_gap_lag1",
+    "state_country_gap_lag1",
+    "major_city_country_gap_lag1",
+    "country_global_gap_lag1"
+  ],
+  "historical_only_features": [],
+  "test_start": "2004-01-01",
+  "historical_end": "2013-09-01",
+  "forecast_horizon_months": 240,
+  "metrics": [
+    {
+      "Model": "Random Forest",
+      "MAE": 0.8292745622,
+      "RMSE": 1.0770125888,
+      "R2": 0.9818308216
+    },
+    {
+      "Model": "Ridge",
+      "MAE": 0.8573946432,
+      "RMSE": 1.1011331592,
+      "R2": 0.9810078814
+    },
+    {
+      "Model": "HistGradientBoosting",
+      "MAE": 0.874765156,
+      "RMSE": 1.1120184154,
+      "R2": 0.9806305321
+    },
+    {
+      "Model": "Climatology Baseline",
+      "MAE": 1.1129483626,
+      "RMSE": 1.3588070778,
+      "R2": 0.9710792646
+    }
+  ],
+  "ablation": [
+    {
+      "FeatureSet": "Base Features + Auxiliary Features",
+      "MAE": 1.1289254171,
+      "RMSE": 1.4215317858,
+      "R2": 0.9683475828
+    },
+    {
+      "FeatureSet": "Full Features",
+      "MAE": 0.8573946432,
+      "RMSE": 1.1011331592,
+      "R2": 0.9810078814
+    }
+  ],
+  "warning": "Statistical temperature forecast; not a physical climate-scenario projection."
+}

@@ -1,0 +1,102 @@
+{
+  "baseline_period": [
+    1901,
+    1930
+  ],
+  "trend": [
+    {
+      "country": "Japan",
+      "trend_C_per_decade": 0.115665374,
+      "p_value": 9.976753516e-18,
+      "r_squared": 0.4827236019
+    },
+    {
+      "country": "France",
+      "trend_C_per_decade": 0.1089841218,
+      "p_value": 0.0,
+      "r_squared": 0.438748214
+    },
+    {
+      "country": "United States",
+      "trend_C_per_decade": 0.0986258232,
+      "p_value": 0.0,
+      "r_squared": 0.3609439579
+    },
+    {
+      "country": "Australia",
+      "trend_C_per_decade": 0.0872853949,
+      "p_value": 0.0,
+      "r_squared": 0.4281607656
+    },
+    {
+      "country": "United Kingdom",
+      "trend_C_per_decade": 0.0843471882,
+      "p_value": 4e-10,
+      "r_squared": 0.2957905382
+    }
+  ],
+  "seasonality": [
+    {
+      "country": "Australia",
+      "hottest_month": 1,
+      "hottest_month_temp": 27.8219522,
+      "coldest_month": 7,
+      "coldest_month_temp": 14.1654197531,
+      "seasonal_amplitude_C": 13.6565324469
+    },
+    {
+      "country": "France",
+      "hottest_month": 7,
+      "hottest_month_temp": 19.433995763,
+      "coldest_month": 1,
+      "coldest_month_temp": 6.3787626439,
+      "seasonal_amplitude_C": 13.0552331191
+    },
+    {
+      "country": "Japan",
+      "hottest_month": 8,
+      "hottest_month_temp": 24.2433410405,
+      "coldest_month": 1,
+      "coldest_month_temp": 0.6323583815,
+      "seasonal_amplitude_C": 23.610982659
+    },
+    {
+      "country": "United Kingdom",
+      "hottest_month": 7,
+      "hottest_month_temp": 14.0048129502,
+      "coldest_month": 1,
+      "coldest_month_temp": 3.5929275198,
+      "seasonal_amplitude_C": 10.4118854305
+    },
+    {
+      "country": "United States",
+      "hottest_month": 7,
+      "hottest_month_temp": 29.1129562155,
+      "coldest_month": 1,
+      "coldest_month_temp": 7.811120576,
+      "seasonal_amplitude_C": 21.3018356395
+    }
+  ],
+  "latest_anomaly": [
+    {
+      "country": "Australia",
+      "mean_anomaly_last10y_C": 0.9328033333
+    },
+    {
+      "country": "France",
+      "mean_anomaly_last10y_C": 1.0619316667
+    },
+    {
+      "country": "Japan",
+      "mean_anomaly_last10y_C": 1.1935675
+    },
+    {
+      "country": "United Kingdom",
+      "mean_anomaly_last10y_C": 0.9709525
+    },
+    {
+      "country": "United States",
+      "mean_anomaly_last10y_C": 1.0807757407
+    }
+  ]
+}
